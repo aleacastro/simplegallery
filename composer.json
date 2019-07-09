@@ -1,0 +1,21 @@
+{
+    "name": "unscode/galleries",
+    "description": "A simple gallery package",
+    "keywords": ["laravel", "gallery", "images"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jorge Lauro Campos Rodrigues",
+            "email": "jorgerodrigues9@outlook.com",
+            "homepage": "https://unscode.com"
+        }
+    ],
+    "require": {
+        "laravel/framework": "5.8.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Unscode\\Galleries\\": "src/"
+        }
+    }
+}
