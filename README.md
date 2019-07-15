@@ -13,7 +13,7 @@ Add to composer.json
 
 ou
 
-```js
+```
   composer require unscode/galleries
 ```
 
@@ -21,19 +21,19 @@ ou
 
 Open `config/app.php` then add
 
-`Unscode\Galleries\Providers\GalleriesServiceProvider::class`
+`Mixdinternet\Galleries\Providers\GalleriesServiceProvider::class`
 
 ## Facades
 
 Open `config/app.php` then add
 
-`'Gallery'   => Unscode\Galleries\Facades\Gallery::class`
+`'Gallery'   => Mixdinternet\Galleries\Facades\Gallery::class`
 
 ## Publishing the files
 
 ```
-$ php artisan vendor:publish --provider="Unscode\Galleries\Providers\GalleriesServiceProvider" --tag="assets"
-$ php artisan vendor:publish --provider="Unscode\Galleries\Providers\GalleriesServiceProvider" --tag="config"
+$ php artisan vendor:publish --provider="Mixdinternet\Galleries\Providers\GalleriesServiceProvider" --tag="assets"
+$ php artisan vendor:publish --provider="Mixdinternet\Galleries\Providers\GalleriesServiceProvider" --tag="config"
 ```
 
 ## Running migrations
@@ -71,8 +71,8 @@ $ php artisan migrate
 ## Attaching the gallery to your model
 
 ```
-use Unscode\Galleries\GalleriableInterface;
-use Unscode\Galleries\GalleriableTrait;
+use Mixdinternet\Galleries\GalleriableInterface;
+use Mixdinternet\Galleries\GalleriableTrait;
 
 class Post extends Model implements GalleriableInterface
 {
