@@ -5,18 +5,19 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Jorge Lauro Campos Rodrigues",
-            "email": "jorgerodrigues9@outlook.com",
-            "homepage": "https://unscode.com"
+            "name": "Irineu Martins Junior",
+            "email": "irineu@mixd.com.br",
+            "homepage": "http://www.mixd.com.br/",
+            "role": "Developer"
         }
     ],
     "require": {
         "php": ">=7.1.3",
-        "laravel/framework": "~5.7"
+        "laravel/framework": "~5.8"
     },
     "autoload": {
         "psr-4": {
-            "Unscode\\Galleries\\": "src/"
+            "Mixdinternet\\Galleries\\": "src/"
         }
     }
 }

@@ -1,13 +1,9 @@
 <?php
 
-namespace Unscode\Galleries;
+namespace Mixdinternet\Galleries;
 
 trait GalleriableTrait
 {
-    /**
-     *
-     * @return void
-     */
     public static function bootGalleriableTrait()
     {
         self::saved(function ($model) {
@@ -66,41 +62,21 @@ trait GalleriableTrait
         });
     }
 
-    /**
-     *
-     *
-     * @param string $name
-     * @return mixed
-     */
     public function galleries($name = 'images')
     {
-        return $this->morphMany(\Unscode\Galleries\Gallery::class, 'galleriable')->where('name', $name);
+        return $this->morphMany(\Mixdinternet\Galleries\Gallery::class, 'galleriable')->where('name', $name);
     }
 
-    /**
-     *
-     * @param string $name
-     * @return mixed
-     */
     public function gallery($name = 'images')
     {
         return $this->galleries($name)->first();
     }
 
-    /**
-     *
-     * @return mixed
-     */
     public function getGalleryAttribute()
     {
         return $this->gallery();
     }
 
-    /**
-     *
-     * @param string $name
-     * @return array
-     */
     public function flatGallery($name = 'images')
     {
         $gallery = $this->galleries($name)->first();

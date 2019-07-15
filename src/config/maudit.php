@@ -12,6 +12,6 @@ return [
     |
     */
 
-    'Unscode\Galleries\Gallery' => 'Galeria',
-    'Unscode\Galleries\Image' => 'Galerias &raquo; Imagens'
+    'Mixdinternet\Galleries\Gallery' => 'Galeria',
+    'Mixdinternet\Galleries\Image' => 'Galerias &raquo; Imagens'
 ];

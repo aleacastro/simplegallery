@@ -2,20 +2,21 @@
 
 return [
 
-    /*
-    |--------------------------------------------------------------------------
-    | Configuração padrão para imagem
-    |--------------------------------------------------------------------------
-    |
-    | Define a configuração padrão para upload e qualidade das imagens
-    | salvas.
-    |
-    */
+   /*
+   |--------------------------------------------------------------------------
+   | Configuração padrão para imagem
+   |--------------------------------------------------------------------------
+   |
+   | Define a configuração padrão para upload e qualidade das imagens
+   | salvas.
+   |
+   */
+
 
     'galleries' => [
-        'width' => 1024,
-        'height' => 768,
-        'quality' => 90
+        'width' => 1024
+        , 'height' => 768
+        , 'quality' => 90
     ],
 
     /*
@@ -27,5 +28,6 @@ return [
     | para a imagem no disco.
     |
     */
+
     'watermark' => false
 ];

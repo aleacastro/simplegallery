@@ -1,21 +1,15 @@
 <?php
 
-namespace Unscode\Galleries\Http\Controllers;
+namespace Mixdinternet\Galleries\Http\Controllers;
 
-use Unscode\Galleries\Image;
 use Illuminate\Http\Request;
-use Unscode\Galleries\Gallery;
-use Folklore\Image\Facades\Image as FolkloreImage;
 use Mixdinternet\Admix\Http\Controllers\AdmixController;
+use Folklore\Image\Facades\Image as FolkloreImage;
+use Mixdinternet\Galleries\Gallery;
+use Mixdinternet\Galleries\Image;
 
 class GalleriesAdminController extends AdmixController
 {
-    /**
-     * Processa os arquivos enviados por upload
-     *
-     * @param Request $request
-     * @return array
-     */
     public function upload(Request $request)
     {
         if ($request->hasFile('file')) {
@@ -65,11 +59,6 @@ class GalleriesAdminController extends AdmixController
         ];
     }
 
-    /**
-     * Ordena as imagens no banco de dados
-     *
-     * @param Request $request
-     */
     public function sort(Request $request)
     {
         $images = $request->get('image');
@@ -82,11 +71,6 @@ class GalleriesAdminController extends AdmixController
         }
     }
 
-    /**
-     * Atualiza informações das imagens no banco de dados
-     *
-     * @param Request $request
-     */
     public function update(Request $request)
     {
         $id = $request->get('id');
@@ -99,11 +83,6 @@ class GalleriesAdminController extends AdmixController
 
     }
 
-    /**
-     * Remove uma image no banco de dados
-     *
-     * @param Request $request
-     */
     public function destroy(Request $request)
     {
         $id = $request->get('id');

@@ -1,12 +1,8 @@
 <?php
 
-namespace Unscode\Galleries;
+namespace Mixdinternet\Galleries;
 
 interface GalleriableInterface
 {
-    /**
-     *
-     * @return mixed
-     */
     public function galleries();
 }
