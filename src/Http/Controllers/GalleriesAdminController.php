@@ -3,13 +3,18 @@
 namespace Mixdinternet\Galleries\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Mixdinternet\Admix\Http\Controllers\AdmixController;
-use Folklore\Image\Facades\Image as FolkloreImage;
-use Mixdinternet\Galleries\Gallery;
 use Mixdinternet\Galleries\Image;
+use Mixdinternet\Galleries\Gallery;
+use App\Http\Controllers\AdminController;
+use Folklore\Image\Facades\Image as FolkloreImage;
 
-class GalleriesAdminController extends AdmixController
+class GalleriesAdminController extends AdminController
 {
+    /**
+     *
+     * @param Request $request
+     * @return array
+     */
     public function upload(Request $request)
     {
         if ($request->hasFile('file')) {
@@ -25,68 +30,69 @@ class GalleriesAdminController extends AdmixController
             $fileName = str_slug(str_limit($fileInfo['filename'], 50, '') . '-' . rand(1, 999)) . '.' . $file->getClientOriginalExtension();
             $file->move($tmpPath, $fileName);
 
-            $config = config('mgalleries.galleries');
-            $default = [
-                'width' => 800
-                , 'height' => 600
-                , 'quality' => 90
-            ];
-            $mergeConfig = array_merge($default, $config);
-
-            FolkloreImage::make(storage_path('cache/tmp') . '/' . $fileName, $mergeConfig)->save($imagesPath . '/' . $fileName);
+            FolkloreImage::make(storage_path('cache/tmp') . '/' . $fileName, [
+                'width' => config('mgalleries.galleries.width', 800),
+                'height' => config('mgalleries.galleries.height', 600),
+                'crop' => true,
+                'quality' => config('mgalleries.galleries.quality', 90)
+            ])->save($imagesPath . '/' . $fileName);
 
             if (config('mgalleries.watermark')) {
                 $imagine = new \Imagine\Imagick\Imagine();
-                $watermark = $imagine->open(config('mgalleries.watermark'));
                 $image = $imagine->open($imagesPath . '/' . $fileName);
-                $size = $image->getSize();
-                $watermark->resize(new \Imagine\Image\Box($size->getWidth(), $size->getHeight()));
-                $wSize = $watermark->getSize();
-                $position = new \Imagine\Image\Point($size->getWidth() - $wSize->getWidth(), $size->getHeight() - $wSize->getHeight());
-
+                $watermark = $imagine->open(config('mgalleries.watermark'));
+                $imageSize = $image->getSize();
+                $watermarkSize = $watermark->getSize();
+                $height = ($imageSize->getWidth() / ($watermarkSize->getWidth() / $watermarkSize->getHeight()));
+                $watermark->resize(new \Imagine\Image\Box($imageSize->getWidth(), $height));
+                $watermarkSize = $watermark->getSize();
+                $position = new \Imagine\Image\Point(0, $imageSize->getHeight() - $watermarkSize->getHeight());
                 $image->paste($watermark, $position);
                 $image->save($imagesPath . '/' . $fileName);
             }
-
             return [
-                'status' => 'success'
-                , 'name' => $fileName
+                'status' => 'success',
+                'name' => $fileName
             ];
         }
-
         return [
             'status' => 'error'
         ];
     }
 
+    /**
+     *
+     * @param Request $request
+     * @return void
+     */
     public function sort(Request $request)
     {
         $images = $request->get('image');
-
         foreach ($images as $k => $v) {
-            $image = Image::find($v);
-            if ($image) {
-                $image->update(['order' => $k]);
-            }
+            Image::find($v)->update(['order' => $k]);
         }
     }
 
+    /**
+     *
+     * @param Request $request
+     * @return void
+     */
     public function update(Request $request)
     {
         $id = $request->get('id');
         $description = $request->get('description');
-        $image = Image::find($id);
-
-        if ($image) {
-            $image->update(['description' => $description]);
-        }
-
+        Image::find($id)->update(['description' => $description]);
     }
 
+    /**
+     *
+     * @param Request $request
+     * @return void
+     */
     public function destroy(Request $request)
     {
         $id = $request->get('id');
-
         Image::destroy($id);
     }
 }
