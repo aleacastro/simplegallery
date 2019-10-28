@@ -7,8 +7,8 @@ class Html
     public function form($model = '', $name = 'images')
     {
         return view('mixdinternet/galleries::admin.galleries.form', [
-            'gallery' => $model->galleries($name)->first()
-            , 'name' => $name
+            'gallery' => $model->galleries($name)->first(),
+            'name' => $name
         ])->render();
     }
 }
