@@ -1,5 +1,5 @@
 {
-    "name": "aleacastro/galleries",
+    "name": "aleacastro/simplegallery",
     "description": "A simple gallery package",
     "keywords": ["laravel", "gallery", "images"],
     "license": "MIT",
